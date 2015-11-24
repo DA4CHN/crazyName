@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+<head>
+<title>Responsive Interactive Canvas</title>
+<script>
+	  var canvas;
+	  var context;
+	  var letters = []
+	  var timer;
+	  var timerTwo;
+	  var possibleLetters = ['letterD','letterE','letterX','letterT','letterR', 'letterA', 'letterN', 'letterO', 'letterL', 'letterF', 'letterU',];
+	  function letter(x, y, color) {
+		this.x = x;
+		this.y = y;
+		this.dx = Math.random()*4-2;
+		this.dy = Math.random()*4-2;
+		this.color = color;
+		this.letter = possibleLetters[Math.floor(Math.random()*possibleLetters.length)];
+	  }
+      function init() {
+        canvas = document.getElementById('canvas');
+        context = canvas.getContext("2d");
+ 
+        window.addEventListener('resize', resizeCanvas, false);
+        window.addEventListener('orientationchange', resizeCanvas, false);
+        resizeCanvas();
+		canvas.onclick = function(event) {
+			handleClick(event.clientX, event.clientY);
+		};
+		timer = setInterval(resizeCanvas, 20);
+		timerTwo = setInterval(newletter, 200);
+      }
+	  function newletter() {
+		var x = Math.random() * canvas.width;
+		var y = Math.random() * canvas.height;
+		var tempR = Math.floor(Math.random()*255);
+		var tempG = Math.floor(Math.random()*255);
+		var tempB = Math.floor(Math.random()*255);
+		var color = "rgb(" + tempR + "," + tempG + "," + tempB +")";
+		letters.push(new letter(x, y, color));
+		
+	  }
+
+	   function drawLetterD(letterD) {
+		context.beginPath();
+		context.fillStyle = letterD.color;
+		context.moveTo(letterD.x,letterD.y);
+		context.lineTo(letterD.x+10,letterD.y);
+		context.bezierCurveTo(letterD.x+45,letterD.y,letterD.x+45,letterD.y+50,letterD.x+10,letterD.y+50);
+		context.lineTo(letterD.x+10,letterD.y+40);
+
+		context.bezierCurveTo(letterD.x+32,letterD.y+40,letterD.x+32,letterD.y+10,letterD.x+10,letterD.y+10);
+		context.lineTo(letterD.x+10,letterD.y+50);
+
+		context.lineTo(letterD.x,letterD.y+50);
+	    context.closePath();
+        context.fill();
+	  }
+
+	   function drawLetterE(letterE) {
+		context.beginPath();
+		context.fillStyle = letterE.color;
+		context.moveTo(letterE.x,letterE.y);
+		context.lineTo(letterE.x+40,letterE.y);
+		context.lineTo(letterE.x+40,letterE.y+10);
+		context.lineTo(letterE.x+10,letterE.y+10);
+		context.lineTo(letterE.x+10,letterE.y+20);
+		context.lineTo(letterE.x+25,letterE.y+20);
+		context.lineTo(letterE.x+25,letterE.y+30);
+		context.lineTo(letterE.x+10,letterE.y+30);
+		context.lineTo(letterE.x+10,letterE.y+40);
+		context.lineTo(letterE.x+40,letterE.y+40);
+		context.lineTo(letterE.x+40,letterE.y+50);
+		context.lineTo(letterE.x,letterE.y+50);
+	    context.closePath();
+        context.fill();
+	  }
+
+	  function drawLetterX(letterX) {
+		context.beginPath();
+		context.fillStyle = letterX.color;
+		context.moveTo(letterX.x,letterX.y);
+		context.lineTo(letterX.x+10,letterX.y);
+		context.lineTo(letterX.x+20,letterX.y+15);
+		context.lineTo(letterX.x+30,letterX.y);
+		context.lineTo(letterX.x+40,letterX.y);
+		context.lineTo(letterX.x+25,letterX.y+25);
+		context.lineTo(letterX.x+40,letterX.y+50);
+		context.lineTo(letterX.x+30,letterX.y+50);
+		context.lineTo(letterX.x+20,letterX.y+35);
+		context.lineTo(letterX.x+10,letterX.y+50);
+		context.lineTo(letterX.x,letterX.y+50);
+		context.lineTo(letterX.x+15,letterX.y+25);
+	    context.closePath();
+        context.fill();
+	  }  
+
+	  function drawLetterT(letterT) {
+		 context.beginPath();
+		context.fillStyle = letterT.color;
+		context.moveTo(letterT.x,letterT.y);
+		context.lineTo(letterT.x+40,letterT.y);
+		context.lineTo(letterT.x+40,letterT.y+10);
+		context.lineTo(letterT.x+25,letterT.y+10);
+		context.lineTo(letterT.x+25,letterT.y+50);
+		context.lineTo(letterT.x+15,letterT.y+50);
+		context.lineTo(letterT.x+15,letterT.y+10);
+		context.lineTo(letterT.x,letterT.y+10);
+	    context.closePath();
+        context.fill();
+	  }
+
+	  function drawLetterR(letterR) {
+		context.beginPath();
+		context.fillStyle = letterR.color;
+		context.moveTo(letterR.x,letterR.y);
+		context.bezierCurveTo(letterR.x+50,letterR.y-10,letterR.x+40,letterR.y+28,letterR.x+25,letterR.y+30);
+		context.lineTo(letterR.x+40,letterR.y+50);
+		context.lineTo(letterR.x+30,letterR.y+50);
+		context.lineTo(letterR.x+15,letterR.y+32);
+		context.lineTo(letterR.x+10,letterR.y+32);
+
+		context.lineTo(letterR.x+10,letterR.y+22);
+		context.bezierCurveTo(letterR.x+30,letterR.y+25,letterR.x+30,letterR.y+5,letterR.x+10,letterR.y+10);
+
+		context.lineTo(letterR.x+10,letterR.y+50);
+		context.lineTo(letterR.x,letterR.y+50);
+	    context.closePath();
+        context.fill();
+	  }
+
+	  function drawLetterA(letterA) {
+		context.beginPath();
+		context.fillStyle = letterA.color;
+		context.moveTo(letterA.x+15,letterA.y);
+		context.lineTo(letterA.x+25,letterA.y);
+		context.lineTo(letterA.x+40,letterA.y+50);
+		context.lineTo(letterA.x+30,letterA.y+50);
+		context.lineTo(letterA.x+25,letterA.y+35);
+		context.lineTo(letterA.x+15,letterA.y+35);
+		context.lineTo(letterA.x+15,letterA.y+28);
+		context.lineTo(letterA.x+25,letterA.y+28);
+		context.lineTo(letterA.x+20,letterA.y+12);
+		context.lineTo(letterA.x+10,letterA.y+50);
+		context.lineTo(letterA.x,letterA.y+50);
+	    context.closePath();
+        context.fill();
+	  }
+
+	  function drawLetterN(letterN) {
+		context.beginPath();
+		context.fillStyle = letterN.color;
+		context.moveTo(letterN.x,letterN.y);
+		context.lineTo(letterN.x+10,letterN.y);
+		context.lineTo(letterN.x+30,letterN.y+30);
+		context.lineTo(letterN.x+30,letterN.y);
+		context.lineTo(letterN.x+40,letterN.y);
+		context.lineTo(letterN.x+40,letterN.y+50);
+		context.lineTo(letterN.x+30,letterN.y+50);
+		context.lineTo(letterN.x+10,letterN.y+20);
+		context.lineTo(letterN.x+10,letterN.y+50);
+		context.lineTo(letterN.x,letterN.y+50);
+	    context.closePath();
+        context.fill();
+	  }
+
+	  function drawLetterO(letterO) {
+		context.beginPath();
+		context.strokeStyle = letterO.color;
+		context.moveTo(letterO.x,letterO.y);
+		context.lineTo(letterO.x+5,letterO.y);
+		context.bezierCurveTo(letterO.x+30,letterO.y,letterO.x+30,letterO.y+50,letterO.x+10,letterO.y+50);
+		context.lineTo(letterO.x-5,letterO.y+50);
+		context.bezierCurveTo(letterO.x-25,letterO.y+50,letterO.x-25,letterO.y,letterO.x,letterO.y);
+		context.lineWidth = 10;
+        context.stroke();
+	  }
+
+	  function drawLetterL(letterL) {
+		context.beginPath();
+		context.fillStyle = letterL.color;
+		context.moveTo(letterL.x,letterL.y);
+		context.lineTo(letterL.x+10,letterL.y);
+		context.lineTo(letterL.x+10,letterL.y+40);
+		context.lineTo(letterL.x+40,letterL.y+40);
+		context.lineTo(letterL.x+40,letterL.y+50);
+		context.lineTo(letterL.x,letterL.y+50);
+	    context.closePath();
+        context.fill();
+	  }
+
+	  function drawLetterF(letterF) {
+		context.beginPath();
+		context.fillStyle = letterF.color;
+		context.moveTo(letterF.x,letterF.y);
+		context.lineTo(letterF.x+40,letterF.y);
+		context.lineTo(letterF.x+40,letterF.y+10);
+		context.lineTo(letterF.x+10,letterF.y+10);
+		context.lineTo(letterF.x+10,letterF.y+20);
+		context.lineTo(letterF.x+25,letterF.y+20);
+		context.lineTo(letterF.x+25,letterF.y+30);
+		context.lineTo(letterF.x+10,letterF.y+30);
+		context.lineTo(letterF.x+10,letterF.y+50);
+		context.lineTo(letterF.x,letterF.y+50);
+	    context.closePath();
+        context.fill();
+	  }
+
+	  function drawLetterU(letterU) {
+		context.beginPath();
+		context.fillStyle = letterU.color;
+		context.moveTo(letterU.x,letterU.y);
+		context.lineTo(letterU.x+10,letterU.y);
+		context.bezierCurveTo(letterU.x,letterU.y+45,letterU.x+40,letterU.y+45,letterU.x+30,letterU.y);
+		context.lineTo(letterU.x+40,letterU.y);
+		context.bezierCurveTo(letterU.x+55,letterU.y+60,letterU.x-15,letterU.y+60,letterU.x,letterU.y);
+        context.fill();
+	  }
+
+	  function drawText() {
+		context.fillStyle = 'white';
+		context.font = 'bold 2em sans-serif';
+		context.textAlign = 'right';
+		context.fillText('DEXTER ARNOLD FORTUNE', canvas.width-40, canvas.height-40);
+	}
+      function resizeCanvas() {
+        canvas.width = window.innerWidth-20;
+        canvas.height = window.innerHeight-20;
+		fillBackgroundColor();
+		for (var i=0; i<letters.length; i++) {
+			if (letters[i].letter == 'letterD') {
+				drawLetterD(letters[i]);
+			} else if (letters[i].letter == 'letterE') {
+				drawLetterE(letters[i]);
+			} else if (letters[i].letter == 'letterX') {
+				drawLetterX(letters[i]);
+			} else if (letters[i].letter == 'letterT') {
+				drawLetterT(letters[i]);
+			} else if (letters[i].letter == 'letterR') {
+				drawLetterR(letters[i]);
+			} else if (letters[i].letter == 'letterA') {
+				drawLetterA(letters[i]);
+			} else if (letters[i].letter == 'letterN') {
+				drawLetterN(letters[i]);
+			} else if (letters[i].letter == 'letterO') {
+				drawLetterO(letters[i]);
+			} else if (letters[i].letter == 'letterL') {
+				drawLetterL(letters[i]);
+			} else if (letters[i].letter == 'letterF') {
+				drawLetterF(letters[i]);
+			} else if (letters[i].letter == 'letterU') {
+				drawLetterU(letters[i]);
+			}
+			if (letters[i].x + letters[i].dx > canvas.width || letters[i].x + letters[i].dx < 0)
+				letters[i].dx = -letters[i].dx;
+			if (letters[i].y + letters[i].dy > canvas.height || letters[i].y + letters[i].dy < 0)
+				letters[i].dy = -letters[i].dy;
+				letters[i].x += letters[i].dx;
+				letters[i].y += letters[i].dy;
+		}
+		drawText();		 
+      }
+	  function fillBackgroundColor() {
+		 context.fillStyle = 'black';
+		 context.fillRect(0, 0, canvas.width, canvas.height);
+	}
+	window.onload = init;
+</script>
+</head>
+<body>
+<canvas id='canvas' width=500 height=500></canvas>
+</body>	  
