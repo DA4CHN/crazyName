@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<title>Responsive Interactive Canvas</title>
+<script>
+	  var canvas;
+	  var context;
+	  var letters = []
+	  var timer;
+	  var timerTwo;
+	  var possibleLetters = ['letterE', 'shape'];
+	  function letter(x, y, color) {
+		this.x = x;
+		this.y = y;
+		this.dx = Math.random()*4-2;
+		this.dy = Math.random()*4-2;
+		this.color = color;
+		this.letter = possibleLetters[Math.floor(Math.random()*possibleLetters.length)];
+	  }
+      function init() {
+        canvas = document.getElementById('canvas');
+        context = canvas.getContext("2d");
+ 
+        window.addEventListener('resize', resizeCanvas, false);
+        window.addEventListener('orientationchange', resizeCanvas, false);
+        resizeCanvas();
+		canvas.onclick = function(event) {
+			handleClick(event.clientX, event.clientY);
+		};
+		timer = setInterval(resizeCanvas, 20);
+		timerTwo = setInterval(newletter, 200);
+      }
+	  function newletter() {
+		var x = Math.random() * canvas.width;
+		var y = Math.random() * canvas.height;
+		var tempR = Math.floor(Math.random()*255);
+		var tempG = Math.floor(Math.random()*255);
+		var tempB = Math.floor(Math.random()*255);
+		var color = "rgb(" + tempR + "," + tempG + "," + tempB +")";
+		letters.push(new letter(x, y, color));
+		
+	  }
+	   function drawLetterE(letterE) {
+		context.beginPath();
+		context.fillStyle = letterE.color;
+		context.moveTo(letterE.x,letterE.y);
+		context.lineTo(letterE.x+40,letterE.y);
+		context.lineTo(letterE.x+40,letterE.y+10);
+		context.lineTo(letterE.x+10,letterE.y+10);
+		context.lineTo(letterE.x+10,letterE.y+20);
+		context.lineTo(letterE.x+25,letterE.y+20);
+		context.lineTo(letterE.x+25,letterE.y+30);
+		context.lineTo(letterE.x+10,letterE.y+30);
+		context.lineTo(letterE.x+10,letterE.y+40);
+		context.lineTo(letterE.x+40,letterE.y+40);
+		context.lineTo(letterE.x+40,letterE.y+50);
+		context.lineTo(letterE.x,letterE.y+50);
+	    context.closePath();
+        context.fill();
+	  }
+	  function shape(shape) {
+	  context.beginPath();
+	  context.arc(x,y,30,0, Math.PI, true);
+	  context.fillStyle = 'red';
+	  context.fill();
+
+	  function drawText() {
+		context.fillStyle = 'white';
+		context.font = 'bold 2em sans-serif';
+		context.textAlign = 'right';
+		context.fillText('DEXTER ARNOLD FORTUNE', canvas.width-40, canvas.height-40);
+	}
+      function resizeCanvas() {
+        canvas.width = window.innerWidth-20;
+        canvas.height = window.innerHeight-20;
+		fillBackgroundColor();
+		for (var i=0; i<letters.length; i++) {
+			if (letters[i].letter == 'letterE') {
+				drawLetterE(letters[i]);
+			} else if (letters[i].letter == 'shape') {
+				shape(letters[i]);
+			}
+			if (letters[i].x + letters[i].dx > canvas.width || letters[i].x + letters[i].dx < 0)
+				letters[i].dx = -letters[i].dx;
+			if (letters[i].y + letters[i].dy > canvas.height || letters[i].y + letters[i].dy < 0)
+				letters[i].dy = -letters[i].dy;
+				letters[i].x += letters[i].dx;
+				letters[i].y += letters[i].dy;
+		}
+		drawText();		 
+      }
+	 function fillBackgroundColor() {
+		 context.fillStyle = 'black';
+		 context.fillRect(0, 0, canvas.width, canvas.height);
+	}
+	window.onload = init;
+</script>
+</head>
+<body>
+<canvas id='canvas' width=500 height=500></canvas>
+</body>	  

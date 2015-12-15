@@ -479,23 +479,8 @@
 		context.font = 'bold 2em sans-serif';
 		context.textAlign = 'right';
 		context.fillText('DEXTER ARNOLD FORTUNE', canvas.width-40, canvas.height-40);
-	  }
-      
-      function drawText2() {
-		 context.fillStyle = 'black';
-		 context.font = '20px Helvetica';
-		 context.textAlign = 'right';
-		 context.fillText('Click to create a new letter.', canvas.width-40, canvas.height-120);
 	}
-
-	  function drawText3() {
-		 context.fillStyle = 'black';
-		 context.font = '20px Helvetica';
-		 context.textAlign = 'right';
-		 context.fillText('Press G to make the letters move faster.', canvas.width-40, canvas.height-80);
-	}
-
-	  function resizeCanvas() {
+      function resizeCanvas() {
         canvas.width = window.innerWidth-20;
         canvas.height = window.innerHeight-20;
 		for (var i=0; i<letters.length; i++) {
@@ -559,9 +544,7 @@
 				letters[i].x += letters[i].dx;
 				letters[i].y += letters[i].dy;
 		}
-		drawText();	
-		drawText2();
-		drawText3();	 
+		drawText();		 
       }
 
     window.addEventListener('keydown', speedUp, false);
